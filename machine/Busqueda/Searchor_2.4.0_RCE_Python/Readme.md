@@ -1,10 +1,15 @@
----- Disclaimer ----
-The exploit code is clone from https://github.com/twisted007/Searchor_2.4.0_Python.
 
-I used this exploit code only for solving HTB lab machine. 
+---
+Disclaimer 
+---
+
+- `The exploit code is clone from https://github.com/twisted007/Searchor_2.4.0_Python.`
+- `I used this exploit code only for solving HTB lab machine.`
 
 
---- Origin README CONTENT ----
+--- 
+Origin README CONTENT 
+---
 This is just a quick script to exploit webservers running the vulnerable version of Searchor.
 
 This script will accept a hostname, the attacker's IP address and the attacker's Port number.

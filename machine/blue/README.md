@@ -14,12 +14,12 @@
 
 - user flag 
 
-![image](https://github.com/popyue/HackTheBox/blob/main/machine/blue/BlueImage/nmap_smb.png)
+![image](https://github.com/popyue/HackTheBox/blob/main/machine/blue/BlueImage/user_flag.png)
 
 - root flag
 
 
-![image](https://github.com/popyue/HackTheBox/blob/main/machine/blue/BlueImage/nmap_smb.png)
+![image](https://github.com/popyue/HackTheBox/blob/main/machine/blue/BlueImage/root_flag.png)
 
 ## Reference 
 
