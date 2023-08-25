@@ -3,10 +3,10 @@
 
 ### nmap 
 
-![[nmap_light.png]]
+![image](https://github.com/popyue/HackTheBox/blob/main/machine/blue/BlueImage/nmap_light.png)
 #### smb vuln 
 
-![[nmap_smb.png]]
+![image](https://github.com/popyue/HackTheBox/blob/main/machine/blue/BlueImage/nmap_smb.png)
 - Potential risk for ms17-010
 
 ## Exploit 
@@ -14,12 +14,12 @@
 
 - user flag 
 
-![[user_flag.png]]
+![image](https://github.com/popyue/HackTheBox/blob/main/machine/blue/BlueImage/nmap_smb.png)
 
 - root flag
 
 
-![[root_flag.png]]
+![image](https://github.com/popyue/HackTheBox/blob/main/machine/blue/BlueImage/nmap_smb.png)
 
 ## Reference 
 
