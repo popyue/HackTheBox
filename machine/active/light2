@@ -1,0 +1,27 @@
+# Nmap 7.94SVN scan initiated Sun May 12 12:41:08 2024 as: nmap -sC -sV -p88,135,139,389,445,464,593,636,3268,3269 -oN light2 10.129.232.168
+Nmap scan report for 10.129.232.168
+Host is up (0.092s latency).
+
+PORT     STATE SERVICE       VERSION
+88/tcp   open  kerberos-sec  Microsoft Windows Kerberos (server time: 2024-05-12 16:41:14Z)
+135/tcp  open  msrpc         Microsoft Windows RPC
+139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
+389/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: active.htb, Site: Default-First-Site-Name)
+445/tcp  open  microsoft-ds?
+464/tcp  open  kpasswd5?
+593/tcp  open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+636/tcp  open  tcpwrapped
+3268/tcp open  ldap          Microsoft Windows Active Directory LDAP (Domain: active.htb, Site: Default-First-Site-Name)
+3269/tcp open  tcpwrapped
+Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb2-security-mode: 
+|   2:1:0: 
+|_    Message signing enabled and required
+| smb2-time: 
+|   date: 2024-05-12T16:41:28
+|_  start_date: 2024-05-12T16:37:02
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun May 12 12:41:36 2024 -- 1 IP address (1 host up) scanned in 28.43 seconds
