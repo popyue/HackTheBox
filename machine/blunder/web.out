@@ -1,0 +1,10 @@
+/.hta                [33m (Status: 403)[0m [Size: 278]
+/.htaccess           [33m (Status: 403)[0m [Size: 278]
+/.htpasswd           [33m (Status: 403)[0m [Size: 278]
+/0                   [32m (Status: 200)[0m [Size: 7573]
+/about               [32m (Status: 200)[0m [Size: 3290]
+/admin               [36m (Status: 301)[0m [Size: 0][34m [--> http://10.129.95.225/admin/][0m
+/cgi-bin/            [36m (Status: 301)[0m [Size: 0][34m [--> http://10.129.95.225/cgi-bin][0m
+/LICENSE             [32m (Status: 200)[0m [Size: 1083]
+/robots.txt          [32m (Status: 200)[0m [Size: 22]
+/server-status       [33m (Status: 403)[0m [Size: 278]

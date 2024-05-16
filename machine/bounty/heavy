@@ -1,0 +1,8 @@
+# Nmap 7.94SVN scan initiated Mon Mar  4 12:37:15 2024 as: nmap -p- -oN heavy 10.129.230.174
+Nmap scan report for 10.129.230.174
+Host is up (0.33s latency).
+Not shown: 65534 filtered tcp ports (no-response)
+PORT   STATE SERVICE
+80/tcp open  http
+
+# Nmap done at Mon Mar  4 12:45:04 2024 -- 1 IP address (1 host up) scanned in 469.47 seconds
