@@ -5,7 +5,7 @@ Release Date: 2023/8/12
 Fix Date: 2023/8/?
 Upload Note Date: 2023/9/23
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/38.png)
+![](./IMG/38.png)
 
 ## Reconnaissance
 
@@ -15,64 +15,64 @@ Upload Note Date: 2023/9/23
 nmap -sC -sV -oN keeper_light 10.10.11.227
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/0.png)
+![](./IMG/0.png)
 ### Web Service
 
 - Access target site, it will guide us to move to tickets.keeper.htb
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/1.png)
+![](./IMG/1.png)
 - Add the domain to /etc/hosts
 ```
 10.10.11.227 tickets.keeper.htb keeper.htb
 ```
 - Access tickets site, it's a login page 
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/2.png)
+![](./IMG/2.png)
 - I can find some software information - RT 4.4.4
 - According to this information, I search it and find it has default credential for login
 ```
 root / password 
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/3.png)
+![](./IMG/3.png)
 - Login by this default credential 
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/4.png)
+![](./IMG/4.png)
 - Enumerate ticket site
 - User Management
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/7.png)
+![](./IMG/7.png)
 - Check user Inorgaard detail
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/5.png)
+![](./IMG/5.png)
 - find another user credential in user management panel 
 ```
 Inorgaard / Welcome2023!
 ```
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/6.png)
+![](./IMG/6.png)
 
 ## Exploit 
 
 - Using SSH to login with the credential
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/8.png)
+![](./IMG/8.png)
 - Check user 
 ```
 id
 ```
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/9.png)
+![](./IMG/9.png)
 - Check /etc/passwd
 ```
 cat /etc/passwd
 ```
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/10.png)
+![](./IMG/10.png)
 - Check user directory 
 - Get user flag
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/12.png)
+![](./IMG/12.png)
 - Besides user flag, there is another interesting zip file 
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/13.png)
+![](./IMG/13.png)
 
 ## Privilege Escalation 
 
@@ -81,7 +81,7 @@ cat /etc/passwd
 - With the file extension, I know that is a keePass file which will record user's password.
 - Besides the kdbx file, there is another file with extension .dmp
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/11.png)
+![](./IMG/11.png)
 - Using these 2 clue, I do some research, it's easy to find a latest cve on keepass - CVE-2023-32784
 
 ### CVE-2023-32784 
@@ -90,29 +90,29 @@ cat /etc/passwd
 In KeePass 2.x before 2.54, it is possible to recover the cleartext master password from a memory dump, even when a workspace is locked or no longer running. The memory dump can be a KeePass process dump, swap file (pagefile.sys), hibernation file (hiberfil.sys), or RAM dump of the entire system. The first character cannot be recovered. In 2.54, there is different API usage and/or random string insertion for mitigation.
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/14.png)
+![](./IMG/14.png)
 - With the search result, this [github PoC](https://github.com/vdohney/keepass-password-dumper) is most recommend or mentioned.
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/15.png)
+![](./IMG/15.png)
 - But I read the content, it suggest to execute in Windows Powershell. 
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/16.png)
+![](./IMG/16.png)
 - So I keep searching the PoC for linux environment.
 	- One is wrote by C - [(GITHUB)PoC](https://github.com/CTM1/CVE-2023-32784-keepass-linux)
 	- Second one is wrote by python - [(GITHUB)PoC](https://github.com/z-jxy/keepass_dump)
 	- Third one also is wrote by python, and I use this one to get the master password - [(GITHUB)PoC](https://github.com/4m4Sec/CVE-2023-32784)
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/17.png)
+![](./IMG/17.png)
 - Execute the poc, I got some possibilities
 ```
 python poc.py -d ../KeePassDumpFull.dmp
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/22.png)
+![](./IMG/22.png)
 - With the description in github, I think the first character won't show by executing the payload directly
 ```
 As a reminder, the first character cannot be found in the dump, and for the second the script will only give you a few possibilities, in any case we recommend you to run the bruteforce on 2 chars with the script below
 ```
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/18.png)
+![](./IMG/18.png)
 ### BruteForce Script From [GITHUB](https://github.com/4m4Sec/CVE-2023-32784)
 ```
 #!/bin/sh
@@ -125,10 +125,10 @@ done < $2
 ```
 - But I didn't use the script to bruteforce password.
 - Instead, I just think all the possibility results are similar to the user name(Inorgaard). 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/19.png)
+![](./IMG/19.png)
 - So, I google the user name (Inorgaard), the result shows a Danish soccer player's name - Norgaard.
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/20.png)
+![](./IMG/20.png)
 - It's a little different, but I think the word is definitely a Danish word.
 - So, I think the master password must a Danish word, too. 
 - I search 'med flode' by google.
@@ -137,20 +137,20 @@ done < $2
 Rødgrød med fløde
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/21.png)
+![](./IMG/21.png)
 - So I open kdbx file with above master password
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/23.png)
+![](./IMG/23.png)
 - After pass auth, I start to enumerate this kdbx.
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/24.png)
+![](./IMG/24.png)
 - I found  some credential for keeper.htb in passcodes/Network/
 ```
 cd passcodes/Network
 ls 
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/26.png)
+![](./IMG/26.png)
 - Show credentail
 ```
 show 0
@@ -159,10 +159,10 @@ show 0
 ```
 root / F4><3K0nd!
 ```
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/25.png)
+![](./IMG/25.png)
 - with this credential, I tried to login by ssh, but failed.
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/27.png)
+![](./IMG/27.png)
 - I read more detail about the credential in keepass.
 - Here is a Notes messsage: 
 ```
@@ -174,50 +174,50 @@ PuTTY-User-KeyFile-3: ssh-rs
 echo <key value> >> putty2
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/28.png)
+![](./IMG/28.png)
 - Then login again, but it still failed.
 - The error message is 'permission denied and bad permission for key'
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/29.png)
+![](./IMG/29.png)
 - So I tried to escalate the permission for this key
 ```
 chmod 400 putty2
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/30.png)
+![](./IMG/30.png)
 - Login again and failed again.
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/31.png)
+![](./IMG/31.png)
 - I start to research how to use putty user key to login ssh service, I found [this one](https://www.liquidweb.com/kb/putty-ssh-keys/)
 - The putty user key should be generated by software: puttygen.exe at first, and the private key will be .ppk
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/32.png)
+![](./IMG/32.png)
 - I think the key file I found also is a ppk.
 - And I also noticed that it's not possible to use openssh login with ppk directly.
 - With this [discussion](https://askubuntu.com/questions/818929/login-ssh-with-ppk-file-on-ubuntu-terminal), following the step to generate .pem file for connecting by openssh service 
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/33.png)
+![](./IMG/33.png)
 - Install putty-tools
 ```
 sudo apt-get install putty-tools
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/34.png)
+![](./IMG/34.png)
 - Generating putty format's key pem file
 ```
 puttygen putty -O private-openssh -o key.pem
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/37.png)
+![](./IMG/37.png)
 - SSH login with key pem 
 ```
 ssh -i key.pem root@10.11.227
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/35.png)
+![](./IMG/35.png)
 - Get root flag
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Keeper/KeeperImage/36.png)
+![](./IMG/36.png)
 
 ## Reference 
 
@@ -264,6 +264,5 @@ ssh -i key.pem root@10.11.227
 ### Not Related Information 
 
 - [Request Tracker - 'ShowPending' SQL Injection](https://www.exploit-db.com/exploits/38459)
-
 
 ###### tags: `HackTheBox` `RT 4.4.4` `KeePass` `CVE-2023-32784` `Putty Private Key` `PPK for OpenSSH` `puttyGen` 

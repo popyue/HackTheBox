@@ -6,7 +6,7 @@
 nmap -sC -sV -oA valentine 10.129.228.141
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/0.png)
+![](./IMG/0.png)
 ### WebSite 
 
 - HTTP
@@ -14,13 +14,13 @@ nmap -sC -sV -oA valentine 10.129.228.141
 http://10.129.228.141
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/1.png)
+![](./IMG/1.png)
 - HTTPS
 ```
 https://10.129.228.141
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/2.png)
+![](./IMG/2.png)
 ### Gobuster 
 
 - HTTP
@@ -28,7 +28,7 @@ https://10.129.228.141
 gobuster -u http://10.129.228.141 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/3.png)
+![](./IMG/3.png)
 - HTTPS
 ```
 gobuster -u http://10.129.228.141 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --no-tls-validation
@@ -40,43 +40,43 @@ gobuster -u http://10.129.228.141 -w /usr/share/wordlists/dirbuster/directory-li
 /dev 
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/4.png)
+![](./IMG/4.png)
 ```
 /dev/notes.txt
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/5.png)
+![](./IMG/5.png)
 - ``` /dev/hype_key ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/6.png)
+![](./IMG/6.png)
 - Copy the content of hype_key
 - Paste it to Decoder function in BurpSuite, and decode it to ASCII-text
 - Got the RSA private key (The format looks like strange in Decoder.)
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/7.png)
+![](./IMG/7.png)
 - Translate it in online tool
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/8.png)
+![](./IMG/8.png)
 - Store the private key to file by terminal
 1. Downloading hex file from website 
 ```
 curl http://10.129.228.143/dev/hype_key_hex 
 ```
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/9.png)
+![](./IMG/9.png)
 2. Convert it by following command 
 ```
 cat hype_key_hex | xxd -r -p > hype_key
 ```
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/10.png)
+![](./IMG/10.png)
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/11.png)
+![](./IMG/11.png)
 - Try this private key to login --> failed 
 - It will ask to password, it's different from I thought at first.
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/12.png)
+![](./IMG/12.png)
 - Check the private key detaily, it looks like a little different.
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/13.png)
+![](./IMG/13.png)
 - This key start from the following: 
 ```
 Proc- Type:4, ENCRYPTED
@@ -87,20 +87,20 @@ DEK-Info:AES-128-CBC, ....
 - The other page is encode and decode 
 - /encode.php 
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/14.png)
+![](./IMG/14.png)
 - /decode.php
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/15.png)
+![](./IMG/15.png)
 - Try encode function page 
 - Input value for encoding: eeee
 - The output encode result: ``` ZWVlZQ== ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/16.png)
+![](./IMG/16.png)
 - Try Decode function page 
 - Input value for decoding: ``` ZWVlZQ== ```
 - Output decode result:  ```eeee```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/17.png)
+![](./IMG/17.png)
 - After those test, I think the encode and decode method is base64. 
 - But the hype_key is converted by ASCII hex.
 
@@ -108,7 +108,7 @@ DEK-Info:AES-128-CBC, ....
 - Access to ```/omg ```
 - It's a picture which display in home page 
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/18.png)
+![](./IMG/18.png)
 - Download it and analysis it by binwalk and exiftool
 - But nothing special 
 ```
@@ -116,7 +116,7 @@ exiftool omg.jpeg
 binwalk -Me omg.jpeg
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/19.png)
+![](./IMG/19.png)
 
 > With above information, I know this page has a string encode and decode function, and it also has a file directory which content a private key with hex format.
 > Try the hype as username, but it still need password to login.
@@ -136,34 +136,34 @@ binwalk -Me omg.jpeg
 nmap -sV -v --script vuln -oA valentine1 10.129.228.141
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/20.png)
+![](./IMG/20.png)
 - Result for ssh service 
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/21.png)
+![](./IMG/21.png)
 - Result for HTTP service 
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/22.png)
+![](./IMG/22.png)
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/23.png)
+![](./IMG/23.png)
 - Result for HTTPS service 
 - ssl-ccs-injection
 - cve-2014-0224
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/24.png)
+![](./IMG/24.png)
 - ssl heartbleed
 - cve-2014-0160
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/25.png)
+![](./IMG/25.png)
 - ssl poodle
 - cve-2014-3566
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/26.png)
+![](./IMG/26.png)
 - sslv2-drown
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/27.png)
+![](./IMG/27.png)
 - Rest of CVE releated to sslv2
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/28.png)
+![](./IMG/28.png)
 ## Exploitation
 
 ### SSL Heartbleed Attack
@@ -174,18 +174,18 @@ nmap -sV -v --script vuln -oA valentine1 10.129.228.141
 - Find the exploit in metasploit
 - Run the exploit.
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/29.png)
+![](./IMG/29.png)
 - Check the result directory 
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/30.png)
+![](./IMG/30.png)
 - Check the content
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/31.png)
+![](./IMG/31.png)
 - Check the base64 encode word and decode it
 - Got a string: ``` heartbleedbelievethehtpe ```
 - It might be a password for ssh login 
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/32.png)
+![](./IMG/32.png)
 
 ### SSH login 
 
@@ -194,43 +194,43 @@ nmap -sV -v --script vuln -oA valentine1 10.129.228.141
 ssh -i hype_key hype@10.129.228.143
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/33.png)
+![](./IMG/33.png)
 - Change the key permission
 ```
 chmod 400 hype_key
 ```
 - Login again with password
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/34.png)
+![](./IMG/34.png)
 #### Second method 
 - Using openssl to regenerate another key to login. 
 - Generate a new ssh RSA key by private key from ```/dev/hype_key ``` and password 
 
 ``` openssl rsa -in hype_key -out new.key```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/35.png)
+![](./IMG/35.png)
 - SSH login
 ```
 ssh -i new.key hype@10.129.228.143
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/36.png)
+![](./IMG/36.png)
 - Get user flag: ``` dce708db8742fcb0e4a9d1f4c92781a7 ``` 
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/37.png)
+![](./IMG/37.png)
 
 ## Post Exploit
 
 - Upload the linpeas script and find the privilege escalation entry.
 - Suspicious file in /root
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/38.png)
+![](./IMG/38.png)
 - Find the host using tmux 
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/39.png)
+![](./IMG/39.png)
 - Check ```.tmux.conf``` 
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/40.png)
+![](./IMG/40.png)
 - Try to check is there any suspend window, but failed
 ```
 tmux at
@@ -239,10 +239,10 @@ tmux ls
 tmux list-sessions
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/41.png)
+![](./IMG/41.png)
 - Check the bash history 
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/42.png)
+![](./IMG/42.png)
 - According to the bash history, I know the user move to ```.devs``` directory 
 - And try to restore the tmux session by following command 
  
@@ -252,7 +252,7 @@ tmux list-sessions
 3. tmux -S /.devs/dev_sess
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/43.png)
+![](./IMG/43.png)
 - This one will create a new session with hype permission
 ```
 tmux -L dev_sess
@@ -264,13 +264,13 @@ tmux -L dev_sess
 tmux -S /.devs/dev_sess
 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/44.png)
+![](./IMG/44.png)
 - Get into tmux session (dev_sess) in root permission 
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/45.png)
+![](./IMG/45.png)
 - Get root flag: ``` 82e61d3fb2924a6a22ea3324d371e4c3 ```
 
-![](https://github.com/popyue/HackTheBox/blob/main/machine/Valentine/ValentineImage/46.png)
+![](./IMG/46.png)
 
 ## Reference 
 
