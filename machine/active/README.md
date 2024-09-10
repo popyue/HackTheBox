@@ -237,36 +237,22 @@ psexec.py active.htb/administrator@10.129.228.218
 
 - Impacket-GetADUser
 - Impacket-GetUserSPNs
-
-
 ## Reference 
 
 ### SMB
-
 - [PWK Notes: SMB Enumeration Checklist [Updated]](https://0xdf.gitlab.io/2018/12/02/pwk-notes-smb-enumeration-checklist-update1.html)
 - [smbmap -R doesn’t list all dirs (missing Groups)](https://forum.hackthebox.com/t/smbmap-r-doesnt-list-all-dirs-missing-groups/3647/3)
 - [139,445 - Pentesting SMB](https://book.hacktricks.xyz/network-services-pentesting/pentesting-smb)
-
 ### LDAP
-
 - [389, 636, 3268, 3269 - Pentesting LDAP](https://book.hacktricks.xyz/network-services-pentesting/pentesting-ldap)
-
 ### Kerberoast 
-
 - [Kerberos Pentesting](https://exploit-notes.hdks.org/exploit/windows/active-directory/kerberos-pentesting/)
 - [AS-REP Roasting](https://exploit-notes.hdks.org/exploit/windows/active-directory/as-rep-roasting/)
 - [Kerberoasting Attack](https://exploit-notes.hdks.org/exploit/windows/active-directory/kerberoasting-attack/)
 - [Kerberos Attacks](https://www.prosec-networks.com/en/blog/kerberos-attacks/)
-
 ### RPClient
-
 - [rpcclient enumeration](https://book.hacktricks.xyz/network-services-pentesting/pentesting-smb/rpcclient-enumeration)
-
 ### AD
-
 - [Active-Directory-Exploitation-Cheat-Sheet](https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet)
 
-
-
-
-###### tags: `HackTheBox`
+###### tags: `HackTheBox` `ActiveDirectory`

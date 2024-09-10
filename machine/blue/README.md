@@ -2,20 +2,20 @@
 
 ### nmap 
 
-![image](./IMG/nmap_light.png)
+![image](./IMG/0.png)
 #### smb vuln 
 
-![image](./IMG/nmap_smb.png)
+![image](./IMG/1.png)
 - Potential risk for ms17-010
 ## Exploit 
 ### Using metasploit 
 
 - user flag 
 
-![image](./IMG/user_flag.png)
+![image](./IMG/2.png)
 - root flag
 
-![image](./IMG/root_flag.png)
+![image](./IMG/3.png)
 
 ## Reference 
 

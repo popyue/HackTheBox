@@ -38,7 +38,7 @@ vim /etc/hosts
 
 > Possible mail server username: orestis
 
-![[74.png]]
+![[machine/brainfuck/IMG/74.png]]
 ### Certificate Information
 
  > According to nmap result, the website deploy on port 443
