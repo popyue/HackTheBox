@@ -1,0 +1,8 @@
+/.hta                [33m (Status: 403)[0m [Size: 283]
+/.htpasswd           [33m (Status: 403)[0m [Size: 288]
+/.htaccess           [33m (Status: 403)[0m [Size: 288]
+/cgi-bin/            [33m (Status: 403)[0m [Size: 287]
+/index               [32m (Status: 200)[0m [Size: 177]
+/index.html          [32m (Status: 200)[0m [Size: 177]
+/test                [32m (Status: 200)[0m [Size: 47371]
+/torrent             [36m (Status: 301)[0m [Size: 312][34m [--> http://popcorn.htb/torrent/][0m
