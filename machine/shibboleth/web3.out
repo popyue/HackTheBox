@@ -1,0 +1,18 @@
+/.hta                [33m (Status: 403)[0m [Size: 286]
+/.htaccess           [33m (Status: 403)[0m [Size: 286]
+/.htpasswd           [33m (Status: 403)[0m [Size: 286]
+/app                 [36m (Status: 301)[0m [Size: 328][34m [--> http://zabbix.shibboleth.htb/app/][0m
+/assets              [36m (Status: 301)[0m [Size: 331][34m [--> http://zabbix.shibboleth.htb/assets/][0m
+/audio               [36m (Status: 301)[0m [Size: 330][34m [--> http://zabbix.shibboleth.htb/audio/][0m
+/conf                [36m (Status: 301)[0m [Size: 329][34m [--> http://zabbix.shibboleth.htb/conf/][0m
+/favicon.ico         [32m (Status: 200)[0m [Size: 32988]
+/fonts               [36m (Status: 301)[0m [Size: 330][34m [--> http://zabbix.shibboleth.htb/fonts/][0m
+/include             [36m (Status: 301)[0m [Size: 332][34m [--> http://zabbix.shibboleth.htb/include/][0m
+/index.php           [32m (Status: 200)[0m [Size: 3686]
+/js                  [36m (Status: 301)[0m [Size: 327][34m [--> http://zabbix.shibboleth.htb/js/][0m
+/local               [36m (Status: 301)[0m [Size: 330][34m [--> http://zabbix.shibboleth.htb/local/][0m
+/locale              [36m (Status: 301)[0m [Size: 331][34m [--> http://zabbix.shibboleth.htb/locale/][0m
+/modules             [36m (Status: 301)[0m [Size: 332][34m [--> http://zabbix.shibboleth.htb/modules/][0m
+/robots.txt          [32m (Status: 200)[0m [Size: 974]
+/server-status       [33m (Status: 403)[0m [Size: 286]
+/vendor              [36m (Status: 301)[0m [Size: 331][34m [--> http://zabbix.shibboleth.htb/vendor/][0m
