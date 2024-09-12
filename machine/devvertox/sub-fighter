@@ -1,0 +1,11 @@
+Target: http://devvortex.htb/
+Total requests: 4989
+==================================================================
+ID    Response   Lines      Word         Chars          Request    
+==================================================================
+00019:  C=200    501 L	    1581 W	  23221 Ch	  "dev - dev"
+
+Total time: 0
+Processed Requests: 4989
+Filtered Requests: 4988
+Requests/sec.: 0

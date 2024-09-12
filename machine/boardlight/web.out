@@ -1,0 +1,8 @@
+/.hta                [33m (Status: 403)[0m [Size: 274]
+/.htaccess           [33m (Status: 403)[0m [Size: 274]
+/.htpasswd           [33m (Status: 403)[0m [Size: 274]
+/css                 [36m (Status: 301)[0m [Size: 304][34m [--> http://board.htb/css/][0m
+/images              [36m (Status: 301)[0m [Size: 307][34m [--> http://board.htb/images/][0m
+/index.php           [32m (Status: 200)[0m [Size: 15949]
+/js                  [36m (Status: 301)[0m [Size: 303][34m [--> http://board.htb/js/][0m
+/server-status       [33m (Status: 403)[0m [Size: 274]

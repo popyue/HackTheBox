@@ -1,0 +1,5 @@
+/.htpasswd           [33m (Status: 403)[0m [Size: 178]
+/.hta                [33m (Status: 403)[0m [Size: 178]
+/.htaccess           [33m (Status: 403)[0m [Size: 178]
+/backup              [36m (Status: 301)[0m [Size: 194][34m [--> http://forlic.htb:9999/dev/backup/][0m
+/test                [32m (Status: 200)[0m [Size: 5]

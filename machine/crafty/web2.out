@@ -1,0 +1,6 @@
+/Home                [32m (Status: 200)[0m [Size: 1826]
+/coming-soon         [32m (Status: 200)[0m [Size: 1206]
+/css                 [36m (Status: 301)[0m [Size: 145][34m [--> http://crafty.htb/css/][0m
+/home                [32m (Status: 200)[0m [Size: 1826]
+/img                 [36m (Status: 301)[0m [Size: 145][34m [--> http://crafty.htb/img/][0m
+/js                  [36m (Status: 301)[0m [Size: 144][34m [--> http://crafty.htb/js/][0m
