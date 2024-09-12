@@ -1,9 +1,0 @@
-/about               [32m (Status: 200)[0m [Size: 5267]
-/choose              [32m (Status: 200)[0m [Size: 6084]
-/dashboard           [36m (Status: 302)[0m [Size: 189][34m [--> /][0m
-/login               [32m (Status: 200)[0m [Size: 2106]
-/logout              [36m (Status: 302)[0m [Size: 189][34m [--> /][0m
-/quote               [32m (Status: 200)[0m [Size: 2237]
-/server-status       [33m (Status: 403)[0m [Size: 278]
-/services            [32m (Status: 200)[0m [Size: 8592]
-/team                [32m (Status: 200)[0m [Size: 8109]

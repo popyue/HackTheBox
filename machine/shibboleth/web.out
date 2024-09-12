@@ -1,7 +1,0 @@
-/.hta                [33m (Status: 403)[0m [Size: 279]
-/.htaccess           [33m (Status: 403)[0m [Size: 279]
-/.htpasswd           [33m (Status: 403)[0m [Size: 279]
-/assets              [36m (Status: 301)[0m [Size: 317][34m [--> http://shibboleth.htb/assets/][0m
-/forms               [36m (Status: 301)[0m [Size: 316][34m [--> http://shibboleth.htb/forms/][0m
-/index.html          [32m (Status: 200)[0m [Size: 59474]
-/server-status       [33m (Status: 403)[0m [Size: 279]

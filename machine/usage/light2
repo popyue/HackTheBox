@@ -1,1 +1,0 @@
-# Nmap 7.94SVN scan initiated Mon Apr 22 11:17:22 2024 as: nmap -p 80,22 -sC -sV -oN light2 10.10.11.18
