@@ -1,0 +1,13 @@
+nmap result 
+Web Port 80 
+- [ ] Apache 2.4.41 
+	- [ ] Exploit Code Searching
+- [ ] Web Access
+	- Find subdomain - crm
+	- Find vulnerable web framework in crm 
+ 	- Find exploit and get reverse shell 
+	- Linpeas finish 
+- RCE
+	- Find credential in htdocs/conf/conf.php	
+SSH Port 22 
+- [ ] OpenSSH 8.2p1

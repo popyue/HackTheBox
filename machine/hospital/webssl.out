@@ -1,0 +1,14 @@
+/.                   [32m (Status: 200)[0m [Size: 5322]
+/examples            [31m (Status: 503)[0m [Size: 403]
+/favicon.ico.        [32m (Status: 200)[0m [Size: 16958]
+/favicon.ico         [32m (Status: 200)[0m [Size: 16958]
+/index.php           [32m (Status: 200)[0m [Size: 5322]
+/Index.php           [32m (Status: 200)[0m [Size: 5322]
+/index.php           [32m (Status: 200)[0m [Size: 5322]
+/index.php.          [32m (Status: 200)[0m [Size: 5322]
+/installer           [36m (Status: 301)[0m [Size: 343][34m [--> https://10.10.11.241/installer/][0m
+/installer.          [36m (Status: 301)[0m [Size: 344][34m [--> https://10.10.11.241/installer./][0m
+/s.php               [32m (Status: 200)[0m [Size: 353]
+/S.php               [32m (Status: 200)[0m [Size: 353]
+/shell.php           [32m (Status: 200)[0m [Size: 15196]
+/ss.php              [32m (Status: 200)[0m [Size: 64]

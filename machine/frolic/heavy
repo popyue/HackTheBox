@@ -1,0 +1,33 @@
+# Nmap 7.94 scan initiated Sun Jan  7 12:18:35 2024 as: nmap -sV -sT -T4 -p- -oN heavy 10.129.230.7
+Warning: 10.129.230.7 giving up on port because retransmission cap hit (6).
+Nmap scan report for 10.129.230.7
+Host is up (0.91s latency).
+Not shown: 65512 closed tcp ports (conn-refused)
+PORT      STATE    SERVICE     VERSION
+22/tcp    open     ssh         OpenSSH 7.2p2 Ubuntu 4ubuntu2.4 (Ubuntu Linux; protocol 2.0)
+139/tcp   open     netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp   open     netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+469/tcp   filtered rcp
+1880/tcp  open     http        Node.js (Express middleware)
+8559/tcp  filtered unknown
+9999/tcp  open     http        nginx 1.10.3 (Ubuntu)
+25146/tcp filtered unknown
+29976/tcp filtered unknown
+31129/tcp filtered unknown
+32822/tcp filtered unknown
+35341/tcp filtered unknown
+36554/tcp filtered unknown
+38068/tcp filtered unknown
+39105/tcp filtered unknown
+40240/tcp filtered unknown
+40778/tcp filtered unknown
+44460/tcp filtered unknown
+46551/tcp filtered unknown
+49908/tcp filtered unknown
+57417/tcp filtered unknown
+57464/tcp filtered unknown
+64805/tcp filtered unknown
+Service Info: Host: FROLIC; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun Jan  7 13:20:26 2024 -- 1 IP address (1 host up) scanned in 3711.71 seconds

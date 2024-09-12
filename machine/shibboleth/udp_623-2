@@ -1,0 +1,14 @@
+# Nmap 7.94SVN scan initiated Thu Feb 22 09:13:38 2024 as: nmap -sU --script ipmi-version -p623 -oN udp_623-2 10.129.230.172
+Nmap scan report for shibboleth.htb (10.129.230.172)
+Host is up (0.24s latency).
+
+PORT    STATE SERVICE
+623/udp open  asf-rmcp
+| ipmi-version: 
+|   Version: 
+|     IPMI-2.0
+|   UserAuth: password, md5, md2, null
+|   PassAuth: auth_msg, auth_user, non_null_user
+|_  Level: 1.5, 2.0
+
+# Nmap done at Thu Feb 22 09:13:39 2024 -- 1 IP address (1 host up) scanned in 1.11 seconds
