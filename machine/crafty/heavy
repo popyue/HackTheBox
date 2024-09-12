@@ -1,9 +1,0 @@
-# Nmap 7.94 scan initiated Mon Feb 12 04:02:11 2024 as: nmap -p- -T4 -sT -oN heavy 10.10.11.249
-Nmap scan report for crafty.htb (10.10.11.249)
-Host is up (0.26s latency).
-Not shown: 65533 filtered tcp ports (no-response)
-PORT      STATE SERVICE
-80/tcp    open  http
-25565/tcp open  minecraft
-
-# Nmap done at Mon Feb 12 04:08:47 2024 -- 1 IP address (1 host up) scanned in 396.43 seconds

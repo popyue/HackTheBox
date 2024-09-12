@@ -1,8 +1,0 @@
-# Nmap 7.94SVN scan initiated Sun Mar 10 13:33:38 2024 as: nmap -p- -oN heavy 10.129.136.9
-Nmap scan report for 10.129.136.9
-Host is up (0.26s latency).
-Not shown: 65534 filtered tcp ports (no-response)
-PORT     STATE SERVICE
-8080/tcp open  http-proxy
-
-# Nmap done at Sun Mar 10 13:41:06 2024 -- 1 IP address (1 host up) scanned in 448.40 seconds
