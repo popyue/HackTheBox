@@ -1,0 +1,7 @@
+# Nmap 7.94SVN scan initiated Mon Mar  4 12:59:01 2024 as: nmap -sU -oN udp 10.129.230.174
+Nmap scan report for 10.129.230.174
+Host is up (0.28s latency).
+All 1000 scanned ports on 10.129.230.174 are in ignored states.
+Not shown: 1000 open|filtered udp ports (no-response)
+
+# Nmap done at Mon Mar  4 13:03:44 2024 -- 1 IP address (1 host up) scanned in 283.16 seconds

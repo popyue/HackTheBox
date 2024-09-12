@@ -1,0 +1,8 @@
+.obsidian
+lab/
+tool/
+VPN/
+.DS_Store
+tools/
+imageDownloader.py
+imageOperation.py
